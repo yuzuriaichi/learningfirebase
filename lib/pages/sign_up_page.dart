@@ -26,6 +26,12 @@ class _SignUpPageState extends State<SignUpPage> {
 
   //sign user up method
   Future signUserUp() async {
+    showDialog(
+      context: context,
+      builder: (context) => Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
     //authenticate
     if (passwordConfirmed()) {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -37,7 +43,9 @@ class _SignUpPageState extends State<SignUpPage> {
         usernameController.text.trim(),
         emailController.text.trim(),
       );
+      Navigator.pop(context);
     } else {
+      Navigator.pop(context);
       _showPasswordWrongDialog(context);
     }
   }

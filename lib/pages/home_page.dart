@@ -94,7 +94,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     ListTile(
                       leading: Icon(
-                        Icons.trolley,
+                        Icons.shopping_bag_sharp,
                         color: Colors.black,
                       ),
                       title: Text('M A R K E T'),
@@ -135,40 +135,46 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       body: listOfPages[selectedIndex],
-      bottomNavigationBar: Container(
-        color: Color(0xFF885A3A),
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: 15.0,
-            vertical: 15.0,
-          ),
-          child: GNav(
-            backgroundColor: Color(0xFF885A3A),
-            color: Colors.black,
-            activeColor: Colors.white,
-            tabBackgroundColor: Color(0xFFA77D54),
-            padding: EdgeInsets.all(15),
-            gap: 5,
-            selectedIndex: selectedIndex,
-            onTabChange: navigateBottomBar,
-            tabs: [
-              GButton(
-                icon: Icons.home,
-                text: "Home",
-              ),
-              GButton(
-                icon: Icons.notifications_active,
-                text: "Notif",
-              ),
-              GButton(
-                icon: Icons.shopping_cart,
-                text: "Shop",
-              ),
-              GButton(
-                icon: Icons.person,
-                text: "Profile",
-              ),
-            ],
+      bottomNavigationBar: ClipRRect(
+        borderRadius: BorderRadiusDirectional.only(
+          topStart: Radius.circular(35),
+          topEnd: Radius.circular(35),
+        ),
+        child: Container(
+          color: Color(0xFF885A3A),
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: 15.0,
+              vertical: 10.0,
+            ),
+            child: GNav(
+              backgroundColor: Color(0xFF885A3A),
+              color: Colors.black,
+              activeColor: Colors.white,
+              tabBackgroundColor: Color(0xFFA77D54),
+              padding: EdgeInsets.all(15),
+              gap: 5,
+              selectedIndex: selectedIndex,
+              onTabChange: navigateBottomBar,
+              tabs: [
+                GButton(
+                  icon: Icons.home,
+                  text: "Home",
+                ),
+                GButton(
+                  icon: Icons.notifications_active,
+                  text: "Notif",
+                ),
+                GButton(
+                  icon: Icons.shopping_cart,
+                  text: "Shop",
+                ),
+                GButton(
+                  icon: Icons.person,
+                  text: "Profile",
+                ),
+              ],
+            ),
           ),
         ),
       ),
