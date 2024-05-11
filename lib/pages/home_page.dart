@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -185,33 +187,43 @@ class _HomePageState extends State<HomePage> {
 class HomePageContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.only(
-          top: 25.0,
-          left: 10.0,
-          right: 10.0,
-          bottom: 10.0,
-        ),
-        child: SizedBox(
-          height: 700, // Adjust the height as needed
-          child: GridView.builder(
-            shrinkWrap: true,
-            itemCount: 30,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-            ),
-            itemBuilder: (context, index) {
-              return ItemSquare(
-                textInSquare: 'item description lorem ipsum',
-                iconData: Icons.favorite,
-              );
-            },
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: SearchBar(
+            hintText: 'Search',
           ),
         ),
-      ),
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.only(
+              top: 15.0,
+              left: 10.0,
+              right: 10.0,
+              bottom: 10.0,
+            ),
+            child: SizedBox(
+              height: 700, // Adjust the height as needed
+              child: GridView.builder(
+                shrinkWrap: true,
+                itemCount: 30,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10,
+                ),
+                itemBuilder: (context, index) {
+                  return ItemSquare(
+                    textInSquare: 'item description lorem ipsum',
+                    iconData: Icons.favorite,
+                  );
+                },
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

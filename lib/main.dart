@@ -7,7 +7,7 @@ import 'package:learningfirebase/auth/main_page.dart';
 import 'package:learningfirebase/pages/chats_page.dart';
 import 'package:learningfirebase/pages/home_page.dart';
 import 'package:learningfirebase/pages/notif_page.dart';
-import 'package:learningfirebase/pages/onboarding_page.dart';
+import 'package:learningfirebase/auth/onboarding_page.dart';
 import 'package:learningfirebase/pages/profile_page.dart';
 import 'package:learningfirebase/pages/settings_page.dart';
 import 'package:learningfirebase/pages/shopping_page.dart';

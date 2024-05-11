@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
@@ -5,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:learningfirebase/components/my_button.dart';
 import 'package:learningfirebase/components/my_textfield.dart';
+import 'package:learningfirebase/helper/helper_functions.dart';
 
 class SignUpPage extends StatefulWidget {
   final VoidCallback showLoginPage;
@@ -34,15 +37,42 @@ class _SignUpPageState extends State<SignUpPage> {
     );
     //authenticate
     if (passwordConfirmed()) {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: emailController.text.trim(),
-        password: passwordController.text.trim(),
-      );
+      try {
+        //create new user
+        UserCredential userCredential =
+            await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: emailController.text.trim(),
+          password: passwordController.text.trim(),
+        );
+
+        //create a new document after creating the new user
+        FirebaseFirestore.instance
+            .collection("Users")
+            .doc(userCredential.user!.email)
+            .set(
+          {
+            'username': usernameController.text.trim(), //initial username
+            'bio': 'Empty Bio . . .' //initially empty bio
+            // can add more field here
+          },
+        );
+
+        //pop loading circle
+        //if (context.mounted) Navigator.pop(context);
+      } on FirebaseAuthException catch (e) {
+        //pop loading circle
+        //Navigator.pop(context);
+
+        //show error to user
+        displayMessageToUser(e.code, context);
+      }
+
       //ni tambah user details
-      addUserDetails(
-        usernameController.text.trim(),
-        emailController.text.trim(),
-      );
+      // addUserDetails(
+      //   usernameController.text.trim(),
+      //   emailController.text.trim(),
+      // );
+
       Navigator.pop(context);
     } else {
       Navigator.pop(context);
@@ -50,14 +80,14 @@ class _SignUpPageState extends State<SignUpPage> {
     }
   }
 
-  Future addUserDetails(String username, String email) async {
-    await FirebaseFirestore.instance.collection('users').add(
-      {
-        'username': username,
-        'email': email,
-      },
-    );
-  }
+  // Future addUserDetails(String username, String email) async {
+  //   await FirebaseFirestore.instance.collection('users').add(
+  //     {
+  //       'username': username,
+  //       'email': email,
+  //     },
+  //   );
+  // }
 
   bool passwordConfirmed() {
     if (passwordController.text.trim() ==
