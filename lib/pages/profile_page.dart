@@ -16,6 +16,9 @@ class _ProfilePageState extends State<ProfilePage> {
   //user
   final currentUser = FirebaseAuth.instance.currentUser!;
 
+  //all users
+  final usersCollection = FirebaseFirestore.instance.collection('Users');
+
   //edit field
   Future<void> editField(String field) async {
     String newValue = "";
@@ -27,8 +30,48 @@ class _ProfilePageState extends State<ProfilePage> {
           "Edit $field",
           style: TextStyle(color: Colors.white),
         ),
+        content: TextField(
+          cursorColor: Colors.brown[200],
+          autofocus: true,
+          style: TextStyle(color: Colors.white),
+          decoration: InputDecoration(
+            hintText: "Enter new $field",
+            hintStyle: TextStyle(color: Colors.grey[400]),
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Color(0xFFC9B09A)),
+            ),
+          ),
+          onChanged: (value) {
+            newValue = value;
+          },
+        ),
+        actions: [
+          //cancle button
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text(
+              'Cancel',
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+
+          //save button
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(newValue),
+            child: Text(
+              'Save',
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+        ],
       ),
     );
+
+    //update in firestore database
+    if (newValue.trim().isNotEmpty) {
+      //update when only ada update
+      await usersCollection.doc(currentUser.email).update({field: newValue});
+    }
   }
 
   @override
