@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors,
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -23,6 +23,8 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   //text editing controllers
   final usernameController = TextEditingController();
+  final firstNameController = TextEditingController();
+  final lastNameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
@@ -52,8 +54,8 @@ class _SignUpPageState extends State<SignUpPage> {
             .set(
           {
             'username': usernameController.text.trim(), //initial username
-            'first_name': 'Enter your name',
-            'last_name': 'Enter your name',
+            'first_name': firstNameController.text.trim(), //initial first name,
+            'last_name': lastNameController.text.trim(), //initial last name,
             'bio': 'Empty Bio . . .' //initially empty bio
             // can add more field here
           },
@@ -69,15 +71,6 @@ class _SignUpPageState extends State<SignUpPage> {
       _showPasswordWrongDialog(context);
     }
   }
-
-  // Future addUserDetails(String username, String email) async {
-  //   await FirebaseFirestore.instance.collection('users').add(
-  //     {
-  //       'username': username,
-  //       'email': email,
-  //     },
-  //   );
-  // }
 
   bool passwordConfirmed() {
     if (passwordController.text.trim() ==
@@ -142,16 +135,33 @@ class _SignUpPageState extends State<SignUpPage> {
                 SizedBox(height: 40),
 
                 Container(
-                    child: Image.asset(
-                  'assets/logos/blacklogo.png',
-                  height: 150,
-                )),
+                  child: Image.asset(
+                    'assets/logos/blacklogo.png',
+                    height: 150,
+                  ),
+                ),
 
                 //Username Text Field
                 SizedBox(height: 25),
                 MyTextfield(
                   controller: usernameController,
                   hintText: 'Username',
+                  obscureText: false,
+                ),
+
+                //first name Text Field
+                SizedBox(height: 10),
+                MyTextfield(
+                  controller: firstNameController,
+                  hintText: 'First name',
+                  obscureText: false,
+                ),
+
+                //last name Text Field
+                SizedBox(height: 10),
+                MyTextfield(
+                  controller: lastNameController,
+                  hintText: 'Last name',
                   obscureText: false,
                 ),
 
