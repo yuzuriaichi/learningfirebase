@@ -91,12 +91,23 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
             return ListView(
               children: [
-                SizedBox(height: 50),
-                //profile picture
-                Icon(
-                  Icons.person,
-                  size: 73,
+                Padding(
+                  padding: const EdgeInsets.only(left: 20.0),
+                  child: Container(
+                    width: 100,
+                    height: 100,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.brown[300],
+                    ),
+                    child: Icon(
+                      Icons.person,
+                      size: 73,
+                    ),
+                  ),
                 ),
+
+                SizedBox(height: 25),
 
                 //user email
                 Text(
@@ -127,14 +138,26 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   onPressed: () => editField('username'),
                 ),
 
+                //first name
+                MyTextBox(
+                  text: userData['first_name'],
+                  sectionName: 'First Name',
+                  onPressed: () => editField('first_name'),
+                ),
+
+                //last name
+                MyTextBox(
+                  text: userData['last_name'],
+                  sectionName: 'Last name',
+                  onPressed: () => editField('last_name'),
+                ),
+
                 //bio
                 MyTextBox(
                   text: userData['bio'],
                   sectionName: 'Bio',
                   onPressed: () => editField('bio'),
                 ),
-
-                //user notes
               ],
             );
           } else if (snapshot.hasError) {

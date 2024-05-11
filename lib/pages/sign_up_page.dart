@@ -52,26 +52,16 @@ class _SignUpPageState extends State<SignUpPage> {
             .set(
           {
             'username': usernameController.text.trim(), //initial username
+            'first_name': 'Enter your name',
+            'last_name': 'Enter your name',
             'bio': 'Empty Bio . . .' //initially empty bio
             // can add more field here
           },
         );
-
-        //pop loading circle
-        //if (context.mounted) Navigator.pop(context);
       } on FirebaseAuthException catch (e) {
-        //pop loading circle
-        //Navigator.pop(context);
-
         //show error to user
         displayMessageToUser(e.code, context);
       }
-
-      //ni tambah user details
-      // addUserDetails(
-      //   usernameController.text.trim(),
-      //   emailController.text.trim(),
-      // );
 
       Navigator.pop(context);
     } else {
