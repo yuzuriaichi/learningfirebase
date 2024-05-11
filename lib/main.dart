@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:learningfirebase/firebase_options.dart';
 import 'package:learningfirebase/auth/main_page.dart';
 import 'package:learningfirebase/pages/chats_page.dart';
+import 'package:learningfirebase/pages/edit_profile_page.dart';
 import 'package:learningfirebase/pages/home_page.dart';
 import 'package:learningfirebase/pages/notif_page.dart';
 import 'package:learningfirebase/auth/onboarding_page.dart';
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
         '/notifpage': (context) => NotificationsPage(),
         '/settingspage': (context) => SettingsPage(),
         '/chatspage': (context) => ChatsPage(),
+        '/editprofilepage': (context) => EditProfilePage()
       },
     );
   }

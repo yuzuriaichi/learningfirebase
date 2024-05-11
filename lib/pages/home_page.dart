@@ -1,9 +1,9 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:learningfirebase/components/item_square.dart';
+import 'package:learningfirebase/components/item_box_widget.dart';
 import 'package:learningfirebase/pages/notif_page.dart';
 import 'package:learningfirebase/pages/profile_page.dart';
 import 'package:learningfirebase/pages/shopping_page.dart';
@@ -89,7 +89,7 @@ class _HomePageState extends State<HomePage> {
                         Icons.trolley,
                         color: Colors.black,
                       ),
-                      title: Text('C A R T S'),
+                      title: Text('C A R T'),
                       onTap: () {
                         Navigator.pushNamed(context, '/shoppingpage');
                       },
@@ -109,7 +109,7 @@ class _HomePageState extends State<HomePage> {
                         Icons.settings,
                         color: Colors.black,
                       ),
-                      title: Text('S E T T I N G'),
+                      title: Text('S E T T I N G S'),
                       onTap: () {
                         Navigator.pushNamed(context, '/settingspage');
                       },
@@ -214,7 +214,7 @@ class HomePageContent extends StatelessWidget {
                   mainAxisSpacing: 10,
                 ),
                 itemBuilder: (context, index) {
-                  return ItemSquare(
+                  return ItemBoxWidget(
                     textInSquare: 'item description lorem ipsum',
                     iconData: Icons.favorite,
                   );
